@@ -81,12 +81,17 @@ WHERE UPPER(title) NOT LIKE '%ANALYST%' AND UPPER(title) NOT LIKE '%ANALYTICS%';
 ---ANSWER: 4
 
 ---BONUS
-SELECT *
+SELECT domain, COUNT(title), days_since_posting 
 FROM data_analyst_jobs
-WHERE skill = 'SQL'
+WHERE skill LIKE '%SQL%'
 AND days_since_posting >(3*7)
 AND domain IS NOT NULL
-ORDER BY 
+GROUP BY domain, days_since_posting
+ORDER BY COUNT(title) DESC
+LIMIT 4;
+---Internet and Software (#1), Banks and Financial Services (#2), Consulting and Business Services (#3)...ALL are 30 days so 4 weeks
+
+
 
 
 
